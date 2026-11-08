@@ -1494,7 +1494,8 @@ class RenderSuperSliverList extends RenderSliverMultiBoxAdaptor
       if (sharedTransform == null) {
         origin = c.localToGlobal(Offset.zero, ancestor: viewport);
       } else {
-        final transform = childTransform!..setFrom(sharedTransform);
+        final transform = childTransform!;
+        transform.setFrom(sharedTransform);
         applyPaintTransform(c, transform);
         origin = MatrixUtils.transformPoint(transform, Offset.zero);
       }
