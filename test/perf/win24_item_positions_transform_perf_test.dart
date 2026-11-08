@@ -81,6 +81,28 @@ void main() {
       return checksum;
     }
 
+    // The shared PerfTester verifier only prints mismatches; make parity a
+    // failing assertion before accepting any timing as a valid comparison.
+    SuperSliverListPerfFlags.shareItemPositionViewportTransform = false;
+    final baseline = list.computeItemPositions()!;
+    SuperSliverListPerfFlags.shareItemPositionViewportTransform = true;
+    final optimized = list.computeItemPositions()!;
+    expect(optimized.length, baseline.length);
+    for (var i = 0; i < baseline.length; i++) {
+      expect(optimized[i].index, baseline[i].index);
+      expect(
+        optimized[i].itemLeadingEdge,
+        closeTo(baseline[i].itemLeadingEdge, 1e-10),
+      );
+      expect(
+        optimized[i].itemTrailingEdge,
+        closeTo(baseline[i].itemTrailingEdge, 1e-10),
+      );
+    }
+    final baselineChecksum = measure(shareTransform: false);
+    final optimizedChecksum = measure(shareTransform: true);
+    expect(optimizedChecksum, baselineChecksum);
+
     final perf = PerfTester<int, int>(
       testName: "Win 24: visible item transform reuse",
       testCases: const [0],
