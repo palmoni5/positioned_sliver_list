@@ -61,14 +61,14 @@ void main() {
                                     itemBuilder: (_, index) => KeepAlive(
                                       keepAlive: index.isEven,
                                       child: SizedBox(
-                                      key: ValueKey(index),
-                                      width: axis == Axis.horizontal
-                                          ? 30.0 + index % 4 * 5
-                                          : null,
-                                      height: axis == Axis.vertical
-                                          ? 30.0 + index % 4 * 5
-                                          : null,
-                                      ),
+                                        key: ValueKey(index),
+                                        width: axis == Axis.horizontal
+                                            ? 30.0 + index % 4 * 5
+                                            : null,
+                                        height: axis == Axis.vertical
+                                            ? 30.0 + index % 4 * 5
+                                            : null,
+                                        ),
                                     ),
                                   ),
                                 ),
