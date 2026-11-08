@@ -45,13 +45,22 @@ void main() {
                                     height: axis == Axis.vertical ? 25 : 400,
                                   ),
                                 ),
+                                SliverPersistentHeader(
+                                  pinned: true,
+                                  delegate: const _PositionTestPinnedHeader(),
+                                ),
                                 SliverOpacity(
-                                  opacity: 1,
+                                  opacity: 0.7,
                                   sliver: SuperSliverList.builder(
                                     listController: list,
                                     itemCount: 300,
                                     extentEstimation: (_, _) => 40,
-                                    itemBuilder: (_, index) => SizedBox(
+                                    addAutomaticKeepAlives: false,
+                                    addRepaintBoundaries: false,
+                                    addSemanticIndexes: false,
+                                    itemBuilder: (_, index) => KeepAlive(
+                                      keepAlive: index.isEven,
+                                      child: SizedBox(
                                       key: ValueKey(index),
                                       width: axis == Axis.horizontal
                                           ? 30.0 + index % 4 * 5
@@ -59,6 +68,7 @@ void main() {
                                       height: axis == Axis.vertical
                                           ? 30.0 + index % 4 * 5
                                           : null,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -100,4 +110,25 @@ void main() {
       }
     }
   }
+}
+
+// Exercise a pinned header's paint offset inside SliverMainAxisGroup.
+class _PositionTestPinnedHeader extends SliverPersistentHeaderDelegate {
+  const _PositionTestPinnedHeader();
+
+  @override
+  double get minExtent => 25;
+
+  @override
+  double get maxExtent => 45;
+
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) => const SizedBox.expand();
+
+  @override
+  bool shouldRebuild(covariant _PositionTestPinnedHeader oldDelegate) => false;
 }
