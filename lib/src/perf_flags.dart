@@ -124,4 +124,9 @@ abstract final class SuperSliverListPerfFlags {
   /// reuse a matrix for each child's direct paint transform instead.
   /// Disable for in-process position parity and performance comparisons.
   static bool shareItemPositionViewportTransform = true;
+
+  /// Win 22: A full refresh of uniform estimates fills the typed-data
+  /// buffer directly and calculates the total without a Dart per-item loop.
+  /// Disable to compare the previous implementation in perf tests.
+  static bool bulkUniformExtentFill = true;
 }

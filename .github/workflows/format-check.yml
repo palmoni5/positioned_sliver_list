@@ -33,11 +33,11 @@ jobs:
       - name: dart format --set-exit-if-changed
         run: dart format --output=none --set-exit-if-changed lib test example/lib
 
-      - name: Show exact formatter diff on failure
+      - name: Show formatter diff on failure
         if: failure()
         run: |
-          dart format test/item_position_transform_parity_test.dart test/perf/win24_item_positions_transform_perf_test.dart
-          git diff -- test/item_position_transform_parity_test.dart test/perf/win24_item_positions_transform_perf_test.dart
+          dart format lib test example/lib
+          git diff -- lib test example/lib
 
   line-endings:
     name: Line endings (no CRLF)
