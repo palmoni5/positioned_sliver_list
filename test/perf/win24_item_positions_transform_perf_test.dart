@@ -39,17 +39,14 @@ void main() {
                 padding: const EdgeInsets.all(8),
                 sliver: SliverMainAxisGroup(
                   slivers: [
-                    const SliverToBoxAdapter(
-                      child: SizedBox(height: 20),
-                    ),
+                    const SliverToBoxAdapter(child: SizedBox(height: 20)),
                     SliverOpacity(
                       opacity: 1,
                       sliver: SuperSliverList.builder(
                         listController: list,
                         itemCount: 50000,
                         extentEstimation: (_, _) => 14,
-                        itemBuilder: (_, index) =>
-                            const SizedBox(height: 14),
+                        itemBuilder: (_, index) => const SizedBox(height: 14),
                       ),
                     ),
                   ],
