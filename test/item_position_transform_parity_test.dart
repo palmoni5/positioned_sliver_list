@@ -68,7 +68,7 @@ void main() {
                                         height: axis == Axis.vertical
                                             ? 30.0 + index % 4 * 5
                                             : null,
-                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
