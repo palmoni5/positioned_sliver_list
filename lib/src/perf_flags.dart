@@ -117,4 +117,11 @@ abstract final class SuperSliverListPerfFlags {
   /// more than twice the current capacity reserves at most the required size
   /// plus 1/16 instead; smaller growth still doubles.
   static bool nearExactLargeGrowth = true;
+
+  /// Win 24: Item position notifications used getTransformTo(viewport) on
+  /// every child, walking the same sliver ancestors and allocating a Matrix4
+  /// each time. Compute the shared sliver-to-viewport transform once and
+  /// reuse a matrix for each child's direct paint transform instead.
+  /// Disable for in-process position parity and performance comparisons.
+  static bool shareItemPositionViewportTransform = true;
 }
